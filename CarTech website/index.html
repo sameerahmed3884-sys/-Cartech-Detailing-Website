@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarTech | Precision Detailing</title>
+<meta name="description" content="CarTech delivers elite ceramic coating and car detailing services. Experience the transformation — scroll to watch perfection unfold."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Geist:wght@600&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "surface-variant": "#353437",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#353437",
+                    "surface-tint": "#c8c6c7",
+                    "tertiary": "#adc6ff",
+                    "outline-variant": "#46464a",
+                    "secondary-fixed": "#dde3eb",
+                    "on-surface-variant": "#c7c6ca",
+                    "primary-fixed": "#e5e2e3",
+                    "surface-container-lowest": "#0e0e10",
+                    "primary-container": "#0a0a0b",
+                    "background": "#131315",
+                    "surface-dim": "#131315",
+                    "surface-container-low": "#1b1b1d",
+                    "on-primary": "#313031",
+                    "on-tertiary-container": "#2976e9",
+                    "surface-container-high": "#2a2a2c",
+                    "inverse-primary": "#5f5e5f",
+                    "on-primary-container": "#7a797a",
+                    "outline": "#919094",
+                    "primary": "#c8c6c7",
+                    "surface-container": "#1f1f21",
+                    "on-secondary": "#2b3137",
+                    "tertiary-container": "#000920",
+                    "inverse-on-surface": "#303032",
+                    "surface-bright": "#39393b",
+                    "secondary": "#c1c7cf",
+                    "secondary-container": "#41474e",
+                    "on-surface": "#e4e2e4",
+                    "error-container": "#93000a",
+                    "inverse-surface": "#e4e2e4",
+                    "on-background": "#e4e2e4",
+                    "surface": "#131315",
+                    "on-secondary-container": "#afb6bd",
+                    "primary-fixed-dim": "#c8c6c7"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+                },
+                "spacing": {
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "base": "8px"
+                },
+                "fontFamily": {
+                    "body-lg": ["Inter", "sans-serif"],
+                    "label-caps": ["Geist", "monospace"],
+                    "display-lg": ["Outfit", "sans-serif"],
+                    "headline-md": ["Outfit", "sans-serif"],
+                    "display-lg-mobile": ["Outfit", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"]
+                },
+                "fontSize": {
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                    "display-lg": ["52px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                    "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                }
+            }
+        }
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .glow-button:hover {
+        box-shadow: 0 0 20px rgba(41, 118, 233, 0.5);
+    }
+
+    /* ── IMAGE FRAME SCROLL HERO ── */
+    #scroll-container { position: relative; }
+
+    #sticky-hero {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        /* Use dvh as fallback for mobile browsers where 100vh is wrong */
+        height: 100dvh;
+        overflow: hidden;
+        background: #000;
+        /* Prevent iOS rubber-band scroll interfering with the sticky */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #hero-frame {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        /* Smooth pixel scaling on all screens */
+        image-rendering: auto;
+    }
+
+    /* ── HERO OVERLAY — full cinematic layer ── */
+    /* ── HERO OVERLAY ── */
+    #hero-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 0;
+        background:
+            linear-gradient(to top,
+                rgba(3,3,5,0.98) 0%,
+                rgba(3,3,5,0.85) 22%,
+                rgba(3,3,5,0.40) 45%,
+                transparent 70%),
+            linear-gradient(to bottom,
+                rgba(3,3,5,0.60) 0%,
+                transparent 25%);
+        pointer-events: none;
+    }
+
+    /* frosted glass text card at bottom */
+    .hero-inner {
+        width: 100%;
+        max-width: 620px;
+        padding: clamp(28px, 5vh, 48px) clamp(20px, 6vw, 72px);
+        padding-top: 0;
+        pointer-events: all;
+    }
+    @media (max-width: 768px) {
+        .hero-inner {
+            padding-bottom: 96px; /* Clear mobile bottom nav */
+        }
+    }
+
+    /* ── BADGE ── */
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-family: 'Geist', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #e4e2e4;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s 0.1s, transform 0.8s 0.1s;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    .hero-badge.visible { opacity: 1; transform: translateY(0); }
+    .hero-badge::before {
+        content: '';
+        width: 6px; height: 6px;
+        background: #2976e9;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #2976e9;
+        animation: pulse-dot 2s infinite;
+        flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+        0%,100%{ opacity:1; transform:scale(1); }
+        50%    { opacity:0.3; transform:scale(1.6); }
+    }
+
+    /* ── MAIN TITLE ── */
+    .hero-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        text-shadow: 0 4px 24px rgba(0,0,0,0.8);
+        margin: 0 0 8px;
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 1s 0.25s, transform 1s 0.25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hero-title.visible { opacity: 1; transform: translateY(0); }
+    .hero-title .accent {
+        background: linear-gradient(90deg, #2976e9, #5ab4f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        text-shadow: none;
+    }
+
+    /* Blue animated underline accent */
+    .hero-title-line {
+        display: block;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #2976e9, #5ab4f0);
+        border-radius: 2px;
+        margin: 10px 0 18px;
+        box-shadow: 0 0 12px rgba(41,118,233,0.6);
+        transition: width 1.2s 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hero-title.visible ~ .hero-title-line,
+    .hero-title-line.visible { width: 80px; }
+
+    /* ── SUBTITLE ── */
+    .hero-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(16px, 2.5vw, 22px);
+        font-weight: 400;
+        line-height: 1.6;
+        color: rgba(255,255,255,0.85);
+        text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+        max-width: 520px;
+        margin: 0 0 32px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.9s 0.45s, transform 0.9s 0.45s;
+    }
+    .hero-subtitle.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── ACTIONS ── */
+    .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.9s 0.65s, transform 0.9s 0.65s;
+        pointer-events: all;
+    }
+    .hero-actions.visible { opacity: 1; transform: translateY(0); }
+    .hero-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 28px;
+        background: #2976e9;
+        color: #fff;
+        font-family: 'Geist', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+        box-shadow: 0 4px 24px rgba(41,118,233,0.4);
+    }
+    .hero-btn-primary:hover {
+        background: #3b85f0;
+        box-shadow: 0 6px 32px rgba(41,118,233,0.6);
+        transform: translateY(-2px);
+    }
+    .hero-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 28px;
+        background: rgba(255,255,255,0.05);
+        color: rgba(228,226,228,0.85);
+        font-family: 'Geist', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.12);
+        text-decoration: none;
+        transition: background 0.25s, border-color 0.25s, transform 0.2s;
+        backdrop-filter: blur(8px);
+    }
+    .hero-btn-secondary:hover {
+        background: rgba(255,255,255,0.10);
+        border-color: rgba(255,255,255,0.22);
+        transform: translateY(-2px);
+    }
+
+    /* Scroll progress indicator */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        transition: opacity 0.6s 1.2s;
+        pointer-events: none;
+    }
+    .scroll-indicator.visible { opacity: 1; }
+    .scroll-indicator span {
+        font-family: 'Geist', sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(199,198,202,0.5);
+    }
+    .scroll-line {
+        width: 1px; height: 50px;
+        background: linear-gradient(to bottom, rgba(199,198,202,0.5), transparent);
+        animation: scroll-drop 1.8s ease-in-out infinite;
+    }
+    @keyframes scroll-drop {
+        0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+        40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+        60%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+        100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* Video progress bar along video scrub */
+    #video-progress-line {
+        position: fixed;
+        top: 0; left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #2976e9, #5a9bf0);
+        width: 0%;
+        z-index: 200;
+        box-shadow: 0 0 10px rgba(41,118,233,0.6);
+        pointer-events: none;
+        /* Use transform instead of width for GPU-composited animation */
+        transform-origin: left center;
+        transform: translateZ(0);
+        will-change: width;
+    }
+
+    /* ── PREMIUM PRELOADER ── */
+    #preload-screen {
+        position: fixed; inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        background: radial-gradient(ellipse 90% 70% at 50% 40%, rgba(41,118,233,0.08) 0%, transparent 70%), #09090b;
+        transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), visibility 0.9s;
+        overflow: hidden;
+    }
+    #preload-screen::before {
+        content: '';
+        position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(41,118,233,0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(41,118,233,0.035) 1px, transparent 1px);
+        background-size: 52px 52px;
+        animation: pgrid 14s linear infinite;
+        pointer-events: none;
+    }
+    @keyframes pgrid { from{transform:translateY(0)} to{transform:translateY(52px)} }
+    #preload-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .preload-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        padding: 44px 60px;
+        background: rgba(13,13,16,0.75);
+        backdrop-filter: blur(40px) saturate(1.6);
+        -webkit-backdrop-filter: blur(40px) saturate(1.6);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 28px;
+        box-shadow: 0 0 0 1px rgba(41,118,233,0.07), 0 24px 80px rgba(0,0,0,0.7);
+    }
+    .preload-ring-wrap {
+        position: relative;
+        width: 104px; height: 104px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .preload-ring-wrap svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    #preload-ring-track { stroke: rgba(255,255,255,0.05); }
+    #preload-ring-fill {
+        stroke: url(#ringGrad);
+        stroke-dasharray: 276.46;
+        stroke-dashoffset: 276.46;
+        transition: stroke-dashoffset 0.28s ease;
+        filter: drop-shadow(0 0 8px rgba(41,118,233,0.8));
+    }
+    .preload-pct-center {
+        font-family: 'Geist', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: #e4e2e4;
+        z-index: 1;
+        letter-spacing: -0.01em;
+    }
+    .preload-logo {
+        font-family: 'Sora', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #e4e2e4;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        text-align: center;
+    }
+    .preload-logo span { color: #2976e9; }
+    .preload-tagline {
+        margin-top: 5px;
+        font-family: 'Geist', sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(199,198,202,0.35);
+        text-align: center;
+    }
+    .preload-bar-track {
+        width: 140px; height: 1px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 2px;
+        overflow: hidden;
+    }
+    #preload-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #2976e9, #5ab4f0);
+        width: 0%;
+        border-radius: 2px;
+        box-shadow: 0 0 8px rgba(41,118,233,0.6);
+        transition: width 0.28s ease;
+    }
+    #preload-pct { display: none; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+
+<!-- ── PREMIUM PRELOADER ── -->
+<div id="preload-screen">
+    <div class="preload-card">
+        <!-- Animated ring progress -->
+        <div class="preload-ring-wrap">
+            <svg width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#2976e9"/>
+                        <stop offset="100%" stop-color="#5ab4f0"/>
+                    </linearGradient>
+                </defs>
+                <circle id="preload-ring-track" cx="52" cy="52" r="44" stroke-width="3" fill="none"/>
+                <circle id="preload-ring-fill"  cx="52" cy="52" r="44" stroke-width="3" fill="none"
+                        stroke-linecap="round"/>
+            </svg>
+            <span class="preload-pct-center" id="preload-pct-ring">0%</span>
+        </div>
+        <!-- Brand -->
+        <div>
+            <div class="preload-logo">Car<span>Tech</span></div>
+            <div class="preload-tagline">Precision Detailing</div>
+        </div>
+        <!-- Thin bar -->
+        <div class="preload-bar-track"><div id="preload-bar"></div></div>
+    </div>
+    <div id="preload-pct" style="display:none">Loading...</div>
+</div>
+
+
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar" class="fixed top-0 z-50 w-full transition-all duration-300 bg-transparent border-b border-transparent">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+    <a class="font-display-lg-mobile text-2xl md:text-3xl tracking-tight text-primary transition-opacity hover:opacity-80" href="index.html">CarTech</a>
+    <div class="hidden md:flex items-center space-x-8">
+        <a class="font-body-md text-body-md text-on-tertiary-container border-b-2 border-on-tertiary-container pb-1" href="index.html">Home</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="services.html">Services</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="portfolio.html">Portfolio</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="booking.html">Contact</a>
+    </div>
+    <div class="flex items-center gap-4">
+        <a href="booking.html" class="hidden md:flex bg-on-tertiary-container text-white px-6 py-2.5 rounded glow-button transition-all duration-300 font-label-caps text-label-caps uppercase tracking-widest hover:scale-105">
+            Book Appointment
+        </a>
+        <button aria-label="Account" class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-300">
+            <span class="material-symbols-outlined text-[24px]">account_circle</span>
+        </button>
+    </div>
+</div>
+</nav>
+
+<!-- Mobile BottomNav -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface-container-highest z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center py-4 px-margin-mobile">
+    <a class="flex flex-col items-center text-on-tertiary-container" href="index.html">
+        <span class="material-symbols-outlined icon-fill">home</span>
+        <span class="font-label-caps text-[10px] mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center text-on-surface-variant" href="services.html">
+        <span class="material-symbols-outlined">directions_car</span>
+        <span class="font-label-caps text-[10px] mt-1">Services</span>
+    </a>
+    <a class="flex flex-col items-center text-on-surface-variant" href="portfolio.html">
+        <span class="material-symbols-outlined">photo_library</span>
+        <span class="font-label-caps text-[10px] mt-1">Portfolio</span>
+    </a>
+    <a class="flex flex-col items-center text-on-surface-variant" href="booking.html">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span class="font-label-caps text-[10px] mt-1">Book</span>
+    </a>
+</div>
+</nav>
+
+<!-- ── SCROLL-DRIVEN IMAGE FRAME HERO ── -->
+<div id="scroll-container">
+    <div id="sticky-hero">
+        <img id="hero-frame" src="image/frame (136).webp" alt="Precision Detailing">
+
+        <div id="hero-overlay">
+            <div class="hero-inner">
+                <!-- Badge -->
+                <div class="hero-badge" id="hero-badge">Ceramic Pro Certified Studio</div>
+
+                <!-- Title -->
+                <h1 class="hero-title" id="hero-title">
+                    Precision Detailing<br/><span class="accent">for the Elite</span>
+                </h1>
+
+                <!-- Animated blue underline -->
+                <span class="hero-title-line" id="hero-title-line"></span>
+
+                <!-- Subtitle -->
+                <p class="hero-subtitle" id="hero-subtitle">
+                    Elevate your vehicle's aesthetic with showroom-quality craftsmanship. Scroll to witness our process.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="hero-actions" id="hero-actions">
+                    <a href="booking.html" class="hero-btn-primary">
+                        Book Your Finish
+                        <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+                    </a>
+                    <a href="services.html" class="hero-btn-secondary">
+                        Our Services
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="scroll-indicator" id="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── WHY CHOOSE US ── -->
+<section class="w-full py-24 px-margin-mobile md:px-margin-desktop bg-surface-dim">
+<div class="max-w-container-max mx-auto">
+    <div class="mb-16 text-center">
+        <h2 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4">The Standard of Excellence</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Uncompromising quality for those who demand the absolute best for their vehicles.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div class="bg-surface-container-low border border-outline-variant rounded-lg p-8 hover:border-on-surface-variant transition-colors duration-300">
+            <div class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-primary">diamond</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Flawless Precision</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Every panel, crevice, and surface treated with surgical attention to detail.</p>
+        </div>
+        <div class="bg-surface-container-low border border-outline-variant rounded-lg p-8 hover:border-on-surface-variant transition-colors duration-300 md:col-span-2 relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-r from-surface-container-low via-surface-container-low/90 to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 h-full w-1/2 opacity-30 group-hover:opacity-50 transition-opacity duration-500 bg-[url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+            <div class="relative z-20 h-full flex flex-col justify-center">
+                <div class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-primary">science</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Advanced Formulations</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-md">Utilizing state-of-the-art ceramic coatings and nanotechnology to ensure unparalleled protection and gloss retention.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ── SIGNATURE SERVICES ── -->
+<section class="w-full py-24 px-margin-mobile md:px-margin-desktop bg-background border-t border-outline-variant/30">
+<div class="max-w-container-max mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div>
+            <h2 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4">Signature Services</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Tailored restoration and protection packages.</p>
+        </div>
+        <a href="services.html" class="inline-flex items-center gap-2 text-on-tertiary-container hover:text-white transition-colors duration-300 font-label-caps text-label-caps uppercase tracking-widest border-b border-transparent hover:border-on-tertiary-container pb-1">
+            View All Services <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div class="group relative rounded-lg overflow-hidden border border-outline-variant aspect-[4/5] bg-surface-container-low cursor-pointer">
+            <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7rbh6y0g-b_qJD3Q23Eaiq2c6FNUbqQBYik6W7RyZdzsjxxu6WOgBr975eMgCz7GPrIxaXmcTvXv3sEj8uqSODPcu12bHlEEQLHp5j4sRPClMa2Df-cn1yl1nElyCIXptkU4b6bTPFArSTVkSmdQUzW_vveAlzMXsMW68zHT6vDwH4Z5-2vvuKtuCBbuAPoyqJrW3gbIkOjjzKUkFozHuPxECEv_KQdTiJ53AOGF1dOlnWI3VdrqXzf9YpmJjrXk2tSBdTS9I_Sg" alt="Ceramic Coating"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+                <div class="flex gap-2 mb-4"><span class="inline-block bg-black text-white border border-outline-variant rounded-full px-3 py-1 font-label-caps text-label-caps">9H HARDNESS</span></div>
+                <h3 class="font-headline-md text-headline-md text-white mb-2">Ceramic Coating</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Ultimate liquid polymer protection for a mirror-like finish that lasts years, not months.</p>
+            </div>
+        </div>
+        <div class="group relative rounded-lg overflow-hidden border border-outline-variant aspect-[4/5] bg-surface-container-low cursor-pointer">
+            <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpm2IYgtTlFyn234wIVKxW5-jVMgD0nR36B1_t1IBHcDkTZP1hxp9CeML0XHvPCmZT9NSoyzSUecNqqcCUJRrA3Ia46_g8hrHJJk3MXaEvvb79f1ArTeNAb0cqORdwTGVffpOWv_IwpuU-u5JI1I0XCsNBqMbd37WJekqUROI9Wu-cp_XP6ZqVe-ugT-N_XaroY6qwzGeLR0hgsuU-30MhrQg063Y_iLLhCM4UoL_2FUdcPnLgHibkATVIh9_Yyjtqm4ciVLpmYXY" alt="Paint Correction"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+                <div class="flex gap-2 mb-4"><span class="inline-block bg-black text-white border border-outline-variant rounded-full px-3 py-1 font-label-caps text-label-caps">MULTI-STAGE</span></div>
+                <h3 class="font-headline-md text-headline-md text-white mb-2">Paint Correction</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Eradicate swirl marks, scratches, and oxidation to reveal true paint depth and clarity.</p>
+            </div>
+        </div>
+        <div class="group relative rounded-lg overflow-hidden border border-outline-variant aspect-[4/5] bg-surface-container-low cursor-pointer">
+            <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIs6n6IgQ5NlQmJSE-Xcw-Fq-9QFv99SBwlSXuxVZF7YozqL-doCdwqa4eNKVedWfUGd6OQRAJwKGg1BGdUFpdEphDqklqd63xwKEuGxiYf3C4mtGj9AQvlDOTMZutZQmWrEiXivb0bpl5PANwUQHO5EN4qx_fFoWZZ0m3uIGAHwixg3LW6yoetTR8vhL1KJijsKIcXM5eQXhaSZi510Vxe3QW_q9dDUwVOpdBhyfmKh3B_qfj4_J1FKi9qldwu3cMD8_X1a5KgEo" alt="Interior Restoration"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+                <div class="flex gap-2 mb-4"><span class="inline-block bg-black text-white border border-outline-variant rounded-full px-3 py-1 font-label-caps text-label-caps">LEATHER CARE</span></div>
+                <h3 class="font-headline-md text-headline-md text-white mb-2">Interior Restoration</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Deep cleaning, conditioning, and protection for all interior surfaces.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="w-full py-32 px-margin-mobile md:px-margin-desktop bg-surface-container-low border-t border-b border-outline-variant relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-on-tertiary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center gap-8">
+        <h2 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-white">Ready for Perfection?</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Experience the pinnacle of automotive detailing. Secure your appointment and elevate your driving experience.</p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
+            <a href="booking.html" class="flex-1 sm:flex-none inline-flex items-center justify-center px-8 py-4 bg-on-tertiary-container text-white font-label-caps text-[15px] tracking-widest uppercase rounded glow-button transition-all duration-300">Book Your Showroom Finish</a>
+            <a href="booking.html" class="flex-1 sm:flex-none inline-flex items-center justify-center px-8 py-4 bg-transparent border border-outline-variant text-on-surface font-label-caps text-[15px] tracking-widest uppercase rounded hover:bg-surface-variant transition-colors duration-300">Consult an Expert</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="bg-surface-container-lowest text-on-surface-variant border-t border-outline-variant w-full">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter px-margin-mobile md:px-margin-desktop pt-12 pb-24 md:py-12 max-w-container-max mx-auto">
+    <div class="flex flex-col gap-6 items-start">
+        <a class="font-display-lg-mobile text-display-lg-mobile text-primary transition-opacity opacity-80 hover:opacity-100" href="index.html">CarTech</a>
+        <p class="font-body-md text-body-md">© 2024 CarTech Precision Detailing. All rights reserved.</p>
+    </div>
+    <div class="flex flex-wrap md:justify-end items-center gap-x-8 gap-y-4">
+        <a class="font-body-md text-body-md hover:text-on-surface transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+        <a class="font-body-md text-body-md hover:text-on-surface transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+        <a class="font-body-md text-body-md hover:text-on-surface transition-colors opacity-80 hover:opacity-100" href="booking.html">Contact</a>
+        <a class="font-body-md text-body-md hover:text-on-surface transition-colors opacity-80 hover:opacity-100" href="#">Instagram</a>
+        <a class="font-body-md text-body-md hover:text-on-surface transition-colors opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+    </div>
+</div>
+</footer>
+
+<script>
+(function () {
+    const navbar        = document.getElementById('navbar');
+    const preloadScreen = document.getElementById('preload-screen');
+    
+    // Show preloader briefly, then hide and show UI
+    let progress = 0;
+    const preloadPct = document.getElementById('preload-pct-ring');
+    const preloadBar = document.getElementById('preload-bar');
+    const ringFill = document.getElementById('preload-ring-fill');
+    
+    const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 5;
+        if (progress >= 100) progress = 100;
+        
+        if (preloadPct) preloadPct.innerText = `${progress}%`;
+        if (preloadBar) preloadBar.style.width = `${progress}%`;
+        if (ringFill) {
+            const offset = 276.46 - (276.46 * progress / 100);
+            ringFill.style.strokeDashoffset = offset;
+        }
+
+        if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+                if (preloadScreen) preloadScreen.classList.add('hidden');
+                setTimeout(() => {
+                    ['hero-badge','hero-title','hero-title-line','hero-subtitle','hero-actions','scroll-indicator']
+                        .forEach(id => {
+                            const el = document.getElementById(id);
+                            if (el) el.classList.add('visible');
+                        });
+                }, 250);
+            }, 500);
+        }
+    }, 100);
+
+    // Navbar blur on scroll
+    function onScroll() {
+        const st = window.scrollY;
+        if (st > 60) {
+            navbar.classList.remove('bg-transparent', 'border-transparent');
+            navbar.classList.add('bg-background/90', 'backdrop-blur-md', 'border-outline-variant');
+        } else {
+            navbar.classList.add('bg-transparent', 'border-transparent');
+            navbar.classList.remove('bg-background/90', 'backdrop-blur-md', 'border-outline-variant');
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+})();
+</script>
+</body>
+</html>
